@@ -6,20 +6,30 @@ function TKTEL(e) {
   if (sheet.getName() == "シート1" && range.getColumn() == 7) {
 
     var intel = String(e.value);
-    var outtel = intel.replace("－", "-");
+    var outtel = intel.replace(/－/g, () => { return '-'; });
     
-    outtel = outtel.replace(/[０-９]/g, function(num) {
+    outtel = outtel.replace(/[０-９]/g, (num) => {
       return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
     });
 
-    var reg = /^[\(（](\d+)[\)）](\d+)-(\d+)$/;
+    var reg1 = /^(\d+)-(\d+)-(\d+)$/
+    var reg2 = /^[\(（](\d+)[\)）](\d+)-(\d+)$/;
+    var reg3 = /^(\d+)[\(（](\d+)[\)）](\d+)$/;
 
-    if (reg.test(outtel)) {
+    if (reg1.test(outtel)) {
+      range.setValue(outtel);
+    }
+    else if (reg2.test(outtel)) {
 
-      outtel = outtel.replace(reg,'$1-$2-$3');
+      outtel = outtel.replace(reg2,'$1-$2-$3');
       range.setValue(outtel);
 
-    } 
+    } else if (reg3.test(outtel)) {
+
+      outtel = outtel.replace(reg3,'$1-$2-$3');
+      range.setValue(outtel);
+
+    }
     
   }
 
