@@ -5,18 +5,18 @@ function TKTEL(e) {
 
   if (sheet.getName() == "シート1" && range.getColumn() == 7) {
 
-    var reg = /^[\(（]([0-9]|[０-９]+)[\)）]([0-9]|[０-９]+)-([0-9]|[０-９]+)$/;
-
     var intel = String(e.value);
+    var outtel = intel.replace("－", "-");
+    
+    outtel = outtel.replace(/[０-９]/g, function(num) {
+      return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
+    });
 
-    if (reg.test(intel)) {
+    var reg = /^[\(（](\d+)[\)）](\d+)-(\d+)$/;
 
-      var outtel = intel.replace(reg,'$1-$2-$3');
-      
-      outtel = outtel.replace(/[０-９]/g, function(num) {
-        return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
-      });
-      
+    if (reg.test(outtel)) {
+
+      outtel = outtel.replace(reg,'$1-$2-$3');
       range.setValue(outtel);
 
     } 
