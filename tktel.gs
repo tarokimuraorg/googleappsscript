@@ -8,8 +8,9 @@ function TKTEL(e) {
     if (range.getColumn() == 7 || range.getColumn() == 8) {
 
       var intel = String(e.value);
-      var outtel = intel.replace(/－/g, () => { return '-'; });
-    
+      var outtel = intel.trim();
+      
+      outtel = outtel.replace(/－/g, () => { return '-'; });
       outtel = outtel.replace(/[０-９]/g, (num) => {
         return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
       });
@@ -32,7 +33,12 @@ function TKTEL(e) {
         range.setValue(outtel);
 
       }
-      
+
+    }
+
+  }
+
+}
     }
 
   }
