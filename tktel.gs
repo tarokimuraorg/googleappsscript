@@ -39,8 +39,3 @@ function TKTEL(e) {
   }
 
 }
-    }
-
-  }
-
-}
