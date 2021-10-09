@@ -9,13 +9,17 @@ function TKTEL(e) {
 
       var intel = String(e.value);
       var outtel = intel.trim();
-      
+
+      outtel = outtel.replace(/　/g, () => { return ' '; });
+      outtel = outtel.replace(/ +/g, () => { return ' '; });
+      outtel = outtel.replace(/ /g, () => { return '-'; });
+
       outtel = outtel.replace(/－/g, () => { return '-'; });
       outtel = outtel.replace(/[０-９]/g, (num) => {
         return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
       });
 
-      var reg1 = /^(\d+)-(\d+)-(\d+)$/
+      var reg1 = /^(\d+)-(\d+)-(\d+)$/;
       var reg2 = /^[\(（](\d+)[\)）](\d+)-(\d+)$/;
       var reg3 = /^(\d+)[\(（](\d+)[\)）](\d+)$/;
 
