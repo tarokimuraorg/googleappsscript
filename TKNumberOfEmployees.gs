@@ -7,12 +7,12 @@ function TKNumberOfEmployees(e) {
 
     var num = Number(e.value);
 
-    if (num < 50) {
-      range.clearContent();
+    if (num > 49) {
+      range.setValue(num);
       return
     }
 
-    range.setValue(num);
+    range.clearContent();
 
   }
 
