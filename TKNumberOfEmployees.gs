@@ -5,14 +5,10 @@ function TKNumberOfEmployees(e) {
 
   if (sheet.getName() == "シート1" && range.getColumn() == 6) {
 
-    var num = Number(e.value);
+    var rule = SpreadsheetApp.newDataValidation().requireNumberGreaterThanOrEqualTo(50);
 
-    if (num > 49) {
-      range.setValue(num);
-      return
-    }
-
-    range.clearContent();
+    range.setDataValidation(rule);
+    range.setNumberFormat('#,##名');
 
   }
 
