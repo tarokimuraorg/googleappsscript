@@ -1,9 +1,9 @@
-function TKAREA(e) {
+function TKArea(e) {
 
   var sheet = e.source.getActiveSheet();
   var range = e.source.getActiveRange();
 
-  if (sheet.getName() == "シート1" && range.getColumn() == 2) {
+  if (!range.isBlank() && sheet.getName() == "シート1" && range.getColumn() == 2) {
 
     var prefecture = String(e.value);
     var areas = ['―'];
