@@ -1,11 +1,11 @@
-function TKTEL(e) {
+function TKTel(e) {
 
   var sheet = e.source.getActiveSheet();
   var range = e.source.getActiveRange();
 
   if (sheet.getName() == "シート1") {
 
-    if (range.getColumn() == 7 || range.getColumn() == 8) {
+    if (!range.isBlank() && range.getColumn() == 7 || range.getColumn() == 8) {
 
       var intel = String(e.value);
       var outtel = intel.trim();
