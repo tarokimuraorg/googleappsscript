@@ -10,7 +10,9 @@ function TKNumberOfEmployees(e) {
     range.setDataValidation(rule);
 
     var innum = String(e.value);
-    var outnum = innum.replace(/[０-９]/g, (num) => {
+    var outnum = innum.trim();
+    
+    outnum = outnum.replace(/[０-９]/g, (num) => {
       return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
     });
 
