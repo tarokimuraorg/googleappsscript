@@ -30,7 +30,7 @@ function TKCompanyName(e) {
 
     }
 
-    var rule = SpreadsheetApp.newDataValidation().requireTextContains('株式会社');
+    var rule = SpreadsheetApp.newDataValidation().requireTextContains('株式会社').build();
     range.setDataValidation(rule);
 
     range.setValue(outname);    
