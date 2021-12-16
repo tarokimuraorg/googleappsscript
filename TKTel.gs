@@ -14,18 +14,21 @@ function TKTel(e) {
       outtel = outtel.replace(/ +/g, () => { return ' '; });
       outtel = outtel.replace(/ /g, () => { return '-'; });
 
-      outtel = outtel.replace(/－|−/g, () => { return '-'; });
+      outtel = outtel.replace(/－|−|—/g, () => { return '-'; });
       outtel = outtel.replace(/[０-９]/g, (num) => {
         return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
       });
 
       var reg1 = /^[\(（](\d+)[\)）](\d+)-(\d+)$/;
       var reg2 = /^(\d+)[\(（](\d+)[\)）](\d+)$/;
+      var reg3 = /^[\(（](\d+)[\)）]-(\d+)-(\d+)$/;
 
       if (reg1.test(outtel)) {
         outtel = outtel.replace(reg1,'$1-$2-$3');
       } else if (reg2.test(outtel)) {
         outtel = outtel.replace(reg2,'$1-$2-$3');
+      } else if (reg3.test(outtel)) {
+        outtel = outtel.replace(reg3,'$1-$2-$3');
       }
 
       if (isTel(outtel) && range.getNote().length > 0) {
