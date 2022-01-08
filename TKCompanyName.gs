@@ -11,6 +11,8 @@ function TKCompanyName(e) {
     outname = outname.replace(/　/g, () => { return ' '; });
     outname = outname.replace(/\s/g, () => { return ' '; });
     outname = outname.replace(/ +/g, () => { return ' '; });
+    outname = outname.replace(/－|−/g, () => { return '-' });
+    outname = outname.replace(/＆/g, () => { return '&' });
     outname = outname.replace(/[０-９Ａ-Ｚａ-ｚ]/g, (cha) => {
       return String.fromCharCode(cha.charCodeAt(0) - 0xFEE0);
     });
