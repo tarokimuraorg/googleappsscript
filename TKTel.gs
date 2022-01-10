@@ -22,6 +22,7 @@ function TKTel(e) {
       var reg1 = /^[\(（](\d+)[\)）](\d+)-(\d+)$/;
       var reg2 = /^(\d+)[\(（](\d+)[\)）](\d+)$/;
       var reg3 = /^[\(（](\d+)[\)）]-(\d+)-(\d+)$/;
+      var reg4 = /^(\d{9})$/;
 
       if (reg1.test(outtel)) {
         outtel = outtel.replace(reg1,'$1-$2-$3');
@@ -29,6 +30,73 @@ function TKTel(e) {
         outtel = outtel.replace(reg2,'$1-$2-$3');
       } else if (reg3.test(outtel)) {
         outtel = outtel.replace(reg3,'$1-$2-$3');
+      } else if (reg4.test(outtel)) {
+        
+        outtel = outtel.replace(reg4,'0$1');
+
+        var head = outtel.slice(0,2);
+        var tail = outtel.slice(6,10);
+
+        // 東京都
+        if (head == '03') {
+          // 03-4567-8901
+          outtel = head + '-' + outtel.slice(2,6) + '-' + tail;
+        }
+
+        head = outtel.slice(0,3);
+        
+        if (head == '042') {
+
+          switch (outtel.slice(3,5)) {
+
+              // 0422-23-4567
+              case '22':
+              // 0422-34-5678
+              case '23':
+              // 0422-45-6789
+              case '24':
+              // 0422-56-7890
+              case '25':
+              // 0422-67-8901
+              case '26':
+              // 0422-78-9012
+              case '27':
+              // 0422-89-0123
+              case '28':
+              // 0422-90-1234
+              case '29':
+                outtel = head + '2-' + outtel.slice(4,6) + '-' + tail;
+                break;
+
+              // 0428-23-4567
+              case '82':
+              // 0428-34-5678
+              case '83':
+              // 0428-78-9012
+              case '87':
+              // 0428-89-0123
+              case '88':
+              // 0428-90-1234
+              case '89':
+                outtel = head + '8-' + outtel.slice(4,6) + '-' + tail;
+                break;
+              
+              default:
+                // 042-201-2345
+                outtel = head + '-' + outtel.slice(3,6) + '-' + tail;
+                break;
+
+          }
+
+        }
+        
+        head = outtel.slice(0,5);
+
+        if (head == '04992' || head == '04994' || head == '04996' || head == '04998') {
+          // 04992-3-4567
+          outtel = head + '-' + outtel.slice(5,6) + '-' + tail;
+        }
+
       }
 
       if (isTel(outtel) && range.getNote().length > 0) {
@@ -43,16 +111,6 @@ function TKTel(e) {
 
       }
       
-      // 電話番号の表記法:X, メモ:有 -> 処理不要
-      /*else if (!isTel(outtel) && range.getNote().length > 0) {
-
-      }*/
-      
-      // 電話番号の表記法:O, メモ:無 -> 処理不要
-      /*else if (isTel(outtel) && range.getNote().length == 0) {
-
-      }*/
-
       range.setValue(outtel);
 
     } else if (range.isBlank()) {
