@@ -74,7 +74,7 @@ function telFomatter(tel) {
   var head = tel.slice(0,2);
   var tail = tel.slice(6,10);
 
-  // 東京都,福岡県
+  // 東京都,福岡県, 愛知県
   if (head == '03') {
     // 03-4567-8901
     return head + '-' + tel.slice(2,6) + '-' + tail;
@@ -122,9 +122,10 @@ function telFomatter(tel) {
 
     }
 
-  } else if (head == '092') {
+  } else if (head == '092' || head == '052') {
 
     // 092-234-5678
+    // 052-123-4567
     return head + '-' + tel.slice(3,6) + '-' + tail;
 
   } else if (head == '093') {
@@ -147,12 +148,22 @@ function telFomatter(tel) {
 
   if (head == '0940' || head == '0942' || head == '0943' || 
       head == '0944' || head == '0946' || head == '0947' || 
-      head == '0948') {
+      head == '0948' || head == '0531' || head == '0532' || 
+      head == '0533' || head == '0536' || head == '0561' || 
+      head == '0562' || head == '0563' || head == '0564' || 
+      head == '0565' || head == '0566' || head == '0567' || 
+      head == '0568' || head == '0569' || head == '0586' || 
+      head == '0587') {
 
     // 0940-12-3456
+    // 0531-12-3456
+    // 0536-12-3456
+    // 0569-12-3456
+    // 0587-12-3456
     return head + '-' + tel.slice(4,6) + '-' + tail;    
 
   } else if (head == '0949') {
+
     if (tel.slice(4,5) == '6') {
       // 09496-2-4567
       return head + '6-' + tel.slice(5,6) + '-' + tail;
@@ -160,6 +171,7 @@ function telFomatter(tel) {
       // 0949-23-4567
       return head + '-' + tel.slice(4,6) + '-' + tail;
     }
+    
   }
         
   head = tel.slice(0,5);
