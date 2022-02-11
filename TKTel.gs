@@ -8,35 +8,32 @@ function TKTel(e) {
     if (!range.isBlank()) {
       
       var intel = String(e.value);
-      var outtel = intel.trim();
+      var outtel = intel.replace(/　/g, () => { return ' '; });
 
-      outtel = outtel.replace('tel:','');
-      outtel = outtel.replace(/　/g, () => { return ' '; });
-      outtel = outtel.replace(/－|−|—|–/g, () => { return ' '; });
+      outtel = outtel.replace('tel:', '');
+      outtel = outtel.replace(/\(/g, () => { return ' '; });
+      outtel = outtel.replace(/\)/g, () => { return ' '; });
+      outtel = outtel.replace(/-|－|−|—|–|‒/g, () => { return ' '; });
       outtel = outtel.replace(/ +/g, () => { return ' '; });
+      outtel = outtel.trim();
       outtel = outtel.replace(/ /g, () => { return '-'; });
-      //outtel = outtel.replace(/-+/g, () => { return '-' })
       outtel = outtel.replace(/[０-９]/g, (num) => {
         return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
       });
+      outtel = outtel.replace('81-','0');
 
-      var reg1 = /^[\(（](\d+)[\)）](\d+)-(\d+)$/;
-      var reg2 = /^(\d+)[\(（](\d+)[\)）](\d+)$/;
-      var reg3 = /^[\(（](\d+)[\)）]-(\d+)-(\d+)$/;
-      var reg4 = /^(\d{9})$/;
-      var reg5 = /^(\d{10})$/;
+      let reg1 = /^(\d{9})$/;
+      let reg2 = /^(\d{10})$/;
 
       if (reg1.test(outtel)) {
-        outtel = outtel.replace(reg1,'$1-$2-$3');
-      } else if (reg2.test(outtel)) {
-        outtel = outtel.replace(reg2,'$1-$2-$3');
-      } else if (reg3.test(outtel)) {
-        outtel = outtel.replace(reg3,'$1-$2-$3');
-      } else if (reg4.test(outtel)) {
+
         outtel = outtel.replace(reg4,'0$1');
-        outtel = telFomatter(outtel)
-      } else if (reg5.test(outtel)) {
-        outtel = telFomatter(outtel)
+        outtel = telFomatter(outtel);
+
+      } else if (reg2.test(outtel)) {
+
+        outtel = telFomatter(outtel);
+
       }
 
       if (isTel(outtel) && range.getNote().length > 0) {
