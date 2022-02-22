@@ -11,8 +11,8 @@ function TKTel(e) {
       var outtel = intel.replace(/　/g, () => { return ' '; });
 
       outtel = outtel.replace('tel:', '');
-      outtel = outtel.replace(/\(/g, () => { return ' '; });
-      outtel = outtel.replace(/\)/g, () => { return ' '; });
+      outtel = outtel.replace(/\(|（/g, () => { return ' '; });
+      outtel = outtel.replace(/\)|）/g, () => { return ' '; });
       outtel = outtel.replace(/-|－|−|—|–|‒/g, () => { return ' '; });
       outtel = outtel.replace(/ +/g, () => { return ' '; });
       outtel = outtel.trim();
