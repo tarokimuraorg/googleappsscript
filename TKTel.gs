@@ -27,7 +27,7 @@ function TKTel(e) {
 
       if (reg1.test(outtel)) {
 
-        outtel = outtel.replace(reg4,'0$1');
+        outtel = outtel.replace(reg1,'0$1');
         outtel = telFomatter(outtel);
 
       } else if (reg2.test(outtel)) {
