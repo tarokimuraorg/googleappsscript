@@ -8,19 +8,23 @@ function TKTel(e) {
     if (!range.isBlank()) {
       
       var intel = String(e.value);
-      var outtel = intel.replace(/　/g, () => { return ' '; });
+      var outtel = intel.replace(/　/g, () => { return ''; });
 
       outtel = outtel.replace('tel:', '');
-      outtel = outtel.replace(/\(|（/g, () => { return ' '; });
-      outtel = outtel.replace(/\)|）/g, () => { return ' '; });
-      outtel = outtel.replace(/-|－|−|—|–|‒/g, () => { return ' '; });
-      outtel = outtel.replace(/ +/g, () => { return ' '; });
+      outtel = outtel.replace(/\(|（/g, () => { return ''; });
+      outtel = outtel.replace(/\)|）/g, () => { return ''; });
+      outtel = outtel.replace(/-|－|−|—|–|‒|‐|－/g, () => { return ''; });
+      outtel = outtel.replace(/ +/g, () => { return ''; });
       outtel = outtel.trim();
-      outtel = outtel.replace(/ /g, () => { return '-'; });
+      //outtel = outtel.replace(/ /g, () => { return '-'; });
       outtel = outtel.replace(/[０-９]/g, (num) => {
         return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
       });
-      outtel = outtel.replace('81-','0');
+      //outtel = outtel.replace('81-','0');
+
+      if (outtel.slice(0,2) == '81') {
+        outtel = outtel.slice(2);
+      }
 
       let reg1 = /^(\d{9})$/;
       let reg2 = /^(\d{10})$/;
@@ -68,8 +72,8 @@ function TKTel(e) {
 
 function telFomatter(tel) {
 
-  var tail = tel.slice(6,10);
   var head = tel.slice(0,5);
+  var tail = tel.slice(6,10);
 
   // 東京都, 福岡県, 愛知県,
   // 大阪府, 神奈川県, 埼玉県
