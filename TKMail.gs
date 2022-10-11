@@ -8,10 +8,10 @@ function TKMail(e) {
     var inname = String(e.value);
     var outname = inname.trim();
     
-    const mail = outname.match(/<(.+?)>;$/);
+    const mail = outname.match(/<(.+@.+)>;$/);
 
-    if (mail.length > 1) {
-      range.setValue(mail[1]);
+    if (mail.length == 2) {
+      outname = mail[1];
     }
 
     range.setValue(outname);
