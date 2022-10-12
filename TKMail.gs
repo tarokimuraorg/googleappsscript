@@ -5,13 +5,13 @@ function TKMail(e) {
 
   if (!range.isBlank() && sheet.getName() == "シート1" && range.getColumn() == 10) {
 
-    var inname = String(e.value);
+    const inname = String(e.value);
     var outname = inname.trim();
+    const reg = /<(.+@.+)>;$/;
     
-    const mail = outname.match(/<(.+@.+)>;$/);
-
-    if (mail.length == 2) {
-      outname = mail[1];
+    if (reg.test(outname)) {
+      outname = outname.replace(reg,'');
+      outname = outname.trim();
     }
 
     range.setValue(outname);
