@@ -1,33 +1,32 @@
 function TKTel(e) {
 
-  var sheet = e.source.getActiveSheet();
-  var range = e.source.getActiveRange();
+  const sheet = e.source.getActiveSheet();
+  const range = e.source.getActiveRange();
 
   if (sheet.getName() == "シート1" && range.getColumn() == 7 || range.getColumn() == 8) {
 
     if (!range.isBlank()) {
       
-      var intel = String(e.value);
+      const intel = String(e.value);
       var outtel = intel.replace(/　/g, () => { return ''; });
 
       outtel = outtel.replace('tel:', '');
       outtel = outtel.replace(/\(|（/g, () => { return ''; });
       outtel = outtel.replace(/\)|）/g, () => { return ''; });
-      outtel = outtel.replace(/-|－|−|—|–|‒|‐|－/g, () => { return ''; });
+      outtel = outtel.replace(/-|－|−|—|–|‒|‐|－|ー/g, () => { return ''; });
       outtel = outtel.replace(/ +/g, () => { return ''; });
       outtel = outtel.trim();
-      //outtel = outtel.replace(/ /g, () => { return '-'; });
+
       outtel = outtel.replace(/[０-９]/g, (num) => {
         return String.fromCharCode(num.charCodeAt(0) - 0xFEE0);
       });
-      //outtel = outtel.replace('81-','0');
 
       if (outtel.slice(0,2) == '81') {
         outtel = outtel.slice(2);
       }
 
-      let reg1 = /^(\d{9})$/;
-      let reg2 = /^(\d{10})$/;
+      const reg1 = /^(\d{9})$/;
+      const reg2 = /^(\d{10})$/;
 
       if (reg1.test(outtel)) {
 
@@ -35,9 +34,7 @@ function TKTel(e) {
         outtel = telFomatter(outtel);
 
       } else if (reg2.test(outtel)) {
-
         outtel = telFomatter(outtel);
-
       }
 
       if (isTel(outtel) && range.getNote().length > 0) {
@@ -218,7 +215,7 @@ function telFomatter(tel) {
 function isTel(tel) {
 
   //var intel = String(tel);
-  var arrtel = tel.split('-');
+  const arrtel = tel.split('-');
 
   if (arrtel[0].slice(0,1) == 0 && arrtel.length == 3) {
 
