@@ -1,11 +1,11 @@
 function TKCompanyName(e) {
 
-  var sheet = e.source.getActiveSheet();
-  var range = e.source.getActiveRange();
+  const sheet = e.source.getActiveSheet();
+  const range = e.source.getActiveRange();
 
   if (!range.isBlank() && sheet.getName() == "シート1" && range.getColumn() == 4) {
 
-    var inname = String(e.value);
+    const inname = String(e.value);
     var outname = inname.trim();
 
     outname = outname.replace(/　/g, () => { return ' '; });
@@ -17,8 +17,8 @@ function TKCompanyName(e) {
       return String.fromCharCode(cha.charCodeAt(0) - 0xFEE0);
     });
 
-    var reg1 = /^株式会社 (.+)$/;
-    var reg2 = /^(.+) 株式会社$/;
+    const reg1 = /^株式会社 (.+)$/;
+    const reg2 = /^(.+) 株式会社$/;
 
     if (reg1.test(outname)) {
 
@@ -32,7 +32,7 @@ function TKCompanyName(e) {
 
     }
 
-    var rule = SpreadsheetApp.newDataValidation().requireTextContains('株式会社').build();
+    const rule = SpreadsheetApp.newDataValidation().requireTextContains('株式会社').build();
     range.setDataValidation(rule);
 
     range.setValue(outname);    
