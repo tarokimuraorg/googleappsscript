@@ -1,11 +1,11 @@
 function TKArea(e) {
 
-  var sheet = e.source.getActiveSheet();
-  var range = e.source.getActiveRange();
+  const sheet = e.source.getActiveSheet();
+  const range = e.source.getActiveRange();
 
   if (!range.isBlank() && sheet.getName() == "シート1" && range.getColumn() == 2) {
 
-    var prefecture = String(e.value);
+    const prefecture = String(e.value);
     var areas = ['―'];
 
     if (prefecture == '東京都') {
@@ -26,7 +26,7 @@ function TKArea(e) {
       areas.push('中野区');
       areas.push('北区');
 
-      var rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
+      const rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
 
       sheet.getRange(range.getRow(), range.getColumn() + 1).setDataValidation(rule);
 
@@ -41,7 +41,7 @@ function TKArea(e) {
       areas.push('福岡市　城南区');
       areas.push('北九州市');
 
-      var rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
+      const rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
 
       sheet.getRange(range.getRow(), range.getColumn() + 1).setDataValidation(rule);
 
@@ -68,7 +68,7 @@ function TKArea(e) {
       areas.push('名古屋市 西区');
       areas.push('名古屋市 南区');
 
-      var rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
+      const rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
 
       sheet.getRange(range.getRow(), range.getColumn() + 1).setDataValidation(rule);
 
@@ -101,7 +101,7 @@ function TKArea(e) {
       areas.push('吹田市');
       areas.push('茨木市');
 
-      var rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
+      const rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
 
       sheet.getRange(range.getRow(), range.getColumn() + 1).setDataValidation(rule);
 
@@ -130,7 +130,7 @@ function TKArea(e) {
       areas.push('横浜市 金沢区');
       areas.push('横浜市 保土ケ谷区');
 
-      var rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
+      const rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
 
       sheet.getRange(range.getRow(), range.getColumn() + 1).setDataValidation(rule);
 
@@ -157,7 +157,7 @@ function TKArea(e) {
       areas.push('朝霞市');
       areas.push('戸田市');
 
-      var rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
+      const rule = SpreadsheetApp.newDataValidation().requireValueInList(areas).build();
 
       sheet.getRange(range.getRow(), range.getColumn() + 1).setDataValidation(rule);
 
