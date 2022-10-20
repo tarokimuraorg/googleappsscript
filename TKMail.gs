@@ -7,12 +7,10 @@ function TKMail(e) {
 
     const inname = String(e.value);
     var outname = inname.trim();
-    const reg = /<(.+@.+)>;$/;
-    
-    if (reg.test(outname)) {
-      outname = outname.replace(reg,'');
-      outname = outname.trim();
-    }
+
+    outname = outname.replace(/＠/g,() => { return '@'; });
+    outname = outname.replace(/<(.+@.+)>;$/,'');
+    outname = outname.trim();
 
     range.setValue(outname);
 
