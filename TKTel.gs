@@ -8,9 +8,11 @@ function TKTel(e) {
     if (!range.isBlank()) {
       
       const intel = String(e.value);
-      var outtel = intel.replace(/　/g, () => { return ''; });
-
+      var outtel = intel.trim()
+      
+      outtel = outtel.replace(/　/g, () => { return ''; });
       outtel = outtel.replace('tel:', '');
+      outtel = outtel.replace(/\./g, () => { return ''; } );
       outtel = outtel.replace(/\(|（/g, () => { return ''; });
       outtel = outtel.replace(/\)|）/g, () => { return ''; });
       outtel = outtel.replace(/-|－|−|—|–|‒|‐|－|ー/g, () => { return ''; });
@@ -96,7 +98,10 @@ function telFomatter(tel) {
       head == '0949' || head == '0930' || head == '0460' || 
       head == '0463' || head == '0465' || head == '0466' || 
       head == '0467' || head == '0480' || head == '0493' || 
-      head == '0494' || head == '0495') {
+      head == '0494' || head == '0495' || head == '0288' ||
+      head == '0749' || head == '0956' || head == '0294' ||
+      head == '0742' || head == '0250' || head == '0853' ||
+      head == '0538') {
 
     // 0940-12-3456
     // 0531-12-3456
@@ -185,7 +190,10 @@ function telFomatter(tel) {
 
   } else if (head == '092' || head == '093' || head == '052' || 
              head == '072' || head == '044' || head == '045' || 
-             head == '046' || head == '048' || head == '049') {
+             head == '046' || head == '048' || head == '049' ||
+             head == '055' || head == '087' || head == '089' ||
+             head == '098' || head == '073' || head == '011' ||
+             head == '082') {
 
     // 092-234-5678
     // 052-123-4567
@@ -200,7 +208,7 @@ function telFomatter(tel) {
 
   head = tel.slice(0,2);
   
-  if (head == '03' || head == '06') {
+  if (head == '03' || head == '06' || head == '04') {
 
     // 03-4567-8901
     // 06-1234-5678
